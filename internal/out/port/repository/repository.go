@@ -3,9 +3,14 @@ package repository
 import "hexagornal-sandbox/internal/domain/entity"
 
 type TodoFetchable interface {
-	GetTodo() ([]entity.Todo, error)
+	GetTodoList() ([]entity.Todo, error)
+	GetTodoDetail(todoId string) (entity.Todo, error)
 }
 
 type TodoCreatable interface {
-	CreateTodo() ([]entity.Todo, error)
+	CreateTodo(title string, isCompleted bool) (entity.Todo, error)
+}
+
+type TodoDeletable interface {
+	DeleteTodo(id string) error
 }

@@ -5,6 +5,6 @@ import (
 	"hexagornal-sandbox/internal/out/port/repository"
 )
 
-type GetTodoListUseCase interface {
-	GetTodoList(repo repository.TodoFetchable) ([]entity.Todo, error)
+type GetTodoDetailUseCase interface {
+	GetTodoDetail(repo repository.TodoFetchable, todoId string) (entity.Todo, error)
 }

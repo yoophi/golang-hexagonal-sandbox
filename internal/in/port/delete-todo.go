@@ -1,5 +1,7 @@
 package port
 
-type DeleteTodo interface {
-	DeleteTodo(input string) error
+import "hexagornal-sandbox/internal/out/port/repository"
+
+type DeleteTodoUseCase interface {
+	DeleteTodo(repo repository.TodoDeletable, todoId string) error
 }

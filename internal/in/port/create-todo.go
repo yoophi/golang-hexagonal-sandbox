@@ -1,5 +1,10 @@
 package port
 
+import (
+	"hexagornal-sandbox/internal/in/port/req"
+	"hexagornal-sandbox/internal/out/port/repository"
+)
+
 type CreateTodoUseCase interface {
-	CreateTodo(input string) error
+	CreateTodo(repo repository.TodoCreatable, input req.CreateTodoRequest) error
 }

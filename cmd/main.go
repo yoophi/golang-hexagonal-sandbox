@@ -3,13 +3,14 @@ package main
 import (
 	"errors"
 	"fmt"
-	"hexagornal-sandbox/internal/application"
-	"hexagornal-sandbox/internal/domain/usecases"
-	"hexagornal-sandbox/internal/out/adaptor/repository"
 	"log"
 	"net/http"
+	"sort"
 
+	"hexagornal-sandbox/internal/application"
+	"hexagornal-sandbox/internal/domain/usecases"
 	"hexagornal-sandbox/internal/in/adaptor/web"
+	"hexagornal-sandbox/internal/out/adaptor/repository"
 
 	"github.com/gin-gonic/gin"
 	"github.com/samber/do"
@@ -20,12 +21,16 @@ func main() {
 	do.Provide(injector, application.NewApplication)
 	do.Provide(injector, web.NewRouter)
 	do.Provide(injector, web.NewTodoController)
-	do.Provide(injector, usecases.NewGetTodoListUseCase)
 	do.Provide(injector, usecases.NewCreateTodoUseCase)
+	do.Provide(injector, usecases.NewDeleteTodoUseCase)
+	do.Provide(injector, usecases.NewGetTodoDetailUseCase)
+	do.Provide(injector, usecases.NewGetTodoListUseCase)
 	do.Provide(injector, repository.NewTodoCreatableRepository)
+	do.Provide(injector, repository.NewTodoDeletableRepository)
 	do.Provide(injector, repository.NewTodoFetchableRepository)
 
 	injectedServices := injector.ListProvidedServices()
+	sort.Strings(injectedServices)
 	for idx, s := range injectedServices {
 		fmt.Printf("%d - %#v\n", idx, s)
 	}
